@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:properties/param.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--数据源-->
+    <import resource="classpath:dataSource.xml"></import>
+
+    <!--dao-->
+    <import resource="application-dao.xml"></import>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<tx:advice id="transactionManagerAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="add*"  read-only="false"  propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="insert*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="update*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="modify*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="delete*"  read-only="false"  propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED"/>-->
+            <!--<tx:method name="query*" read-only="true" propagation="NOT_SUPPORTED"/>-->
+            <!--<tx:method name="find*" read-only="true" propagation="NOT_SUPPORTED"/>-->
+            <!--<tx:method name="load*" read-only="true" propagation="NOT_SUPPORTED"/>-->
+            <!--<tx:method name="count*" read-only="true" propagation="NOT_SUPPORTED"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="brandCoupon" expression="execution(public * com.yukuai.core.platform.site.brand.service.impl.BrandCouponServiceImpl.*(..))"/>-->
+        <!--<aop:advisor advice-ref="transactionManagerAdvice" pointcut-ref="brandCoupon"></aop:advisor>-->
+    <!--</aop:config>-->
+
+</beans>
