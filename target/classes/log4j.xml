@@ -22,9 +22,6 @@
     <category name="com.ibatis">
         <priority value="debug" />
     </category>
-    <category name="com.yukuai.core.platform.site">
-        <priority value="debug" />
-    </category>
     <category name="org.springframework.web">
         <priority value="debug" />
     </category>
