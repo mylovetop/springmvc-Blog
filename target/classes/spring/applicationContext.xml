@@ -21,10 +21,29 @@
     <!--dao-->
     <import resource="application-dao.xml"></import>
 
+    <!--ehcache 缓存-->
+    <import resource="classpath*:cache/cacheContext.xml"></import>
+
+    <bean id="testServiceTarget" class="com.springapp.test.TestServiceImpl"></bean>
+
+    <bean id="testService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target">
+            <ref bean="testServiceTarget"></ref>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>methodCachePointCut</value>
+                <value>methodCachePointCutAdvice</value>
+            </list>
+        </property>
+    </bean>
+
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+
 
     <!--<tx:advice id="transactionManagerAdvice" transaction-manager="transactionManager">-->
         <!--<tx:attributes>-->
