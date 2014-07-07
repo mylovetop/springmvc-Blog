@@ -21,6 +21,7 @@ public class MethodCacheInterceptor implements MethodInterceptor, InitializingBe
 
     private Cache cache;
 
+
     public void setCache(Cache cache){
         this.cache = cache;
     }
@@ -49,15 +50,18 @@ public class MethodCacheInterceptor implements MethodInterceptor, InitializingBe
         logger.debug("Find object from cache is " + cache.getName());
 
         String cacheKey = getCacheKey(targetName, methodName, arguments);
+        System.out.println("cacheKey:" + cacheKey);
         Element element = cache.get(cacheKey);
         if (null == element){
             logger.debug("Hold up method , Get method result and create cache........!");
             result = methodInvocation.proceed();//获取所拦截方法的返回值
+//            System.out.println("result:" + result);
             element = new Element(cacheKey, (Serializable)result);
+            System.out.println("element:"+element);
             cache.put(element);
         }
 
-
+        System.out.println("element.getObjectValue()：" + element.getObjectValue());
         return element.getObjectValue();
     }
 

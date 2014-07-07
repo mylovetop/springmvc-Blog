@@ -21,22 +21,6 @@
     <!--dao-->
     <import resource="application-dao.xml"></import>
 
-    <!--ehcache 缓存-->
-    <import resource="classpath*:cache/cacheContext.xml"></import>
-
-    <bean id="testServiceTarget" class="com.springapp.test.TestServiceImpl"></bean>
-
-    <bean id="testService" class="org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="target">
-            <ref bean="testServiceTarget"></ref>
-        </property>
-        <property name="interceptorNames">
-            <list>
-                <value>methodCachePointCut</value>
-                <value>methodCachePointCutAdvice</value>
-            </list>
-        </property>
-    </bean>
 
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -64,5 +48,24 @@
         <!--<aop:pointcut id="brandCoupon" expression="execution(public * com.yukuai.core.platform.site.brand.service.impl.BrandCouponServiceImpl.*(..))"/>-->
         <!--<aop:advisor advice-ref="transactionManagerAdvice" pointcut-ref="brandCoupon"></aop:advisor>-->
     <!--</aop:config>-->
+
+
+    <!--ehcache 缓存-->
+    <import resource="classpath*:cache/cacheContext.xml"></import>
+
+    <bean id="testServiceTarget" class="com.springapp.test.TestServiceImpl"></bean>
+
+    <bean id="testService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target">
+            <ref bean="testServiceTarget"></ref>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>methodCachePointCut</value>
+                <value>methodCachePointCutAdvice</value>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

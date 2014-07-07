@@ -33,6 +33,7 @@ public class MethodCacheAfterAdvice implements AfterReturningAdvice, Initializin
 
     @Override
     public void afterReturning(Object o, Method method, Object[] objects, Object o2) throws Throwable {
+
         //获取目标class的全名，如：com.co.cache.test.TestServiceImpl，然后循环cache的key list，remove cache中所有和该class相关的element。
         String className = o2.getClass().getName();
         List list = cache.getKeys();

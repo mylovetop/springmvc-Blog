@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
-    <diskStore path="${cache.path}"/>
+    <diskStore path="/Users/zdsoft/Desktop/cache/"/>
     <defaultCache
             maxElementsInMemory="1000"
             eternal="false"
