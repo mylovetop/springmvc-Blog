@@ -68,4 +68,7 @@
     </bean>
 
 
+    <!--任务调度-->
+    <import resource="classpath:quartz/quartz.xml"></import>
+
 </beans>

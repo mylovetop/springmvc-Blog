@@ -57,10 +57,10 @@ public class MethodCacheInterceptor implements MethodInterceptor, InitializingBe
             result = methodInvocation.proceed();//获取所拦截方法的返回值
 //            System.out.println("result:" + result);
             element = new Element(cacheKey, (Serializable)result);
-            System.out.println("element:"+element);
+
             cache.put(element);
         }
-
+        System.out.println("element:"+element);
         System.out.println("element.getObjectValue()：" + element.getObjectValue());
         return element.getObjectValue();
     }

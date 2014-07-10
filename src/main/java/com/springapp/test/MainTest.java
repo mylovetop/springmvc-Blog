@@ -13,6 +13,8 @@ public class MainTest {
         ApplicationContext context = new ClassPathXmlApplicationContext(DEFAULT_CONTEXT_FILE);
         TestService testService = (TestService)context.getBean("testService");
 
+
+
         System.out.println("1--第一次查找并创建cache");
         testService.getAllObject();
 
