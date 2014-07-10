@@ -1,7 +1,6 @@
 package com.springapp.quartz;
 
 import org.quartz.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import javax.annotation.Resource;
@@ -16,11 +15,16 @@ public class Test {
     @Resource
     SchedulerFactoryBean schedulerFactoryBean;
 
-    Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
-    List<ScheduleJob> jobList = DataWorkContext.getAllJob();
+    public void run() throws Exception{
+        System.out.println("Test run");
+        try {
 
-    public void t() throws Exception{
+
+        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+
+        List<ScheduleJob> jobList = DataWorkContext.getAllJob();
+
         for (ScheduleJob job: jobList){
 
             TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());
@@ -57,6 +61,10 @@ public class Test {
 
             }
 
+        }
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
