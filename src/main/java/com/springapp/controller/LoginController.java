@@ -2,6 +2,8 @@ package com.springapp.controller;
 
 import com.springapp.util.CheckCode;
 import com.springapp.util.Constant;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,11 @@ import java.io.IOException;
 @Controller
 public class LoginController {
 
+    private Logger logger = Logger.getLogger(LoginController.class);
+
     @RequestMapping("/login")
     public String login(ModelMap modelMap, HttpServletResponse response, HttpServletRequest request) throws IOException{
-
+        modelMap.addAttribute("action", "登录Action");
         return "login";
     }
 
@@ -37,7 +41,7 @@ public class LoginController {
             String str = new CheckCode().getCertPic(0, 0, response.getOutputStream());
             session.setAttribute(Constant.KEY_CHECK_CODE, str);
         } catch (IOException e){
-            e.printStackTrace();
+            logger.error("生成验证码失败:" + e.getMessage(), e);
         }
 
     }
