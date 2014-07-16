@@ -1,0 +1,46 @@
+package com.springapp.controller;
+
+import com.springapp.util.CheckCode;
+import com.springapp.util.Constant;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+/**
+ * Created by zdsoft on 14-7-16.
+ */
+
+@Controller
+public class LoginController {
+
+    @RequestMapping("/login")
+    public String login(ModelMap modelMap, HttpServletResponse response, HttpServletRequest request) throws IOException{
+
+        return "login";
+    }
+
+
+    /**
+     * 验证码
+     * @param req
+     * @param response
+     */
+    @RequestMapping("/checkCode")
+    public void checkCode(HttpServletRequest req, HttpServletResponse response){
+        try {
+            HttpSession session = req.getSession();
+            String str = new CheckCode().getCertPic(0, 0, response.getOutputStream());
+            session.setAttribute(Constant.KEY_CHECK_CODE, str);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+}
